@@ -152,7 +152,11 @@ class TestHTMLTemplate(unittest.TestCase):
         self.assertIn("function esc(", HTML_TEMPLATE)
 
     def test_template_has_chart_js(self):
-        self.assertIn("chart.js", HTML_TEMPLATE.lower())
+        self.assertIn("chart.umd.min.js", HTML_TEMPLATE.lower())
+
+    def test_template_serves_chart_js_locally(self):
+        self.assertIn('src="/vendor/chart.umd.min.js"', HTML_TEMPLATE)
+        self.assertNotIn("cdn.jsdelivr.net", HTML_TEMPLATE)
 
     def test_template_has_substring_matching(self):
         """Verify getPricing falls back to substring match for unknown models."""
